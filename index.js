@@ -1,0 +1,1 @@
+//exportar una función (mdLinks).

@@ -1,15 +1,25 @@
 
-//servidor local
-//los modulos de node se pueden importar al script del servidor usando require
-//libreria que vamos a importar es http que se encarga de servir apps web
-var http = require("http");
 
-var  = function(sol,res){
-console.log("recibimos una nueva peticion");
-respuesta.end("hola mundo");
+const fs = require('fs');
+const path = require('path');
+
+const ruta = (data) => {
+  if (!path.isAbsolute(data)) {
+
+    const fileAbsolut = path.resolve(data);
+    fs.readFile(fileAbsolut, 'utf8', function(err, data) {
+      
+      if (err){
+        console.log('sin archivo');
+      } 
+      else{
+        const line = data.split('\n');
+        for (let i = 0; i < line.length; i++) {
+          const lines = line[i];
+          console.log(lines); }
+                                               }
+    });
+  }
 };
-//decirle en que puerto se ejecuta
-//retorna un objeto 
-var servidor = http.createServer(manejador);
-servidor.listen(3000);
 
+ruta('./README.md');
