@@ -1,5 +1,6 @@
 
-const match= url.match(/^https?:\/\/(www.\.[\w-]+\w{2,6})\/?/)
+const URL = README.md
+const match= URL.match(/^https?:\/\/(www.\.[\w-]+\w{2,6})\/?/)
 console.log(match);
 const readFileMd = () => {
   fs.readFile('./README.md', 'utf8', (err, data) => {
