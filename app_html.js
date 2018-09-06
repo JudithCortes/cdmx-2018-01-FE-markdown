@@ -1,5 +1,10 @@
 
-var http = require("http"),
+
+//montar un servidor donde se sirve un archivo
+//se hace require de http
+var http = require("http")
+//se usa modulo de node fs(fileSystem) que se comunica con 
+//el sistema de archivos
 var fs = require("fs");
 var ruta = require("path");
 
@@ -26,9 +31,9 @@ const ejecutar=()=>{
             contentType = 'text/javascript';
             break;
         }
-        ruta.exist(rutaArchivo, e = (existe)=>{
+        ruta.exist(rutaArchivo, function(){
             if(existe){
-                fs.readFile(rutaArchivo, e =(error,contenido)=>{
+                fs.readFile(rutaArchivo, function(error,contenido){
                     if(error){
                         res.writeHead(500);
                         res.end();
