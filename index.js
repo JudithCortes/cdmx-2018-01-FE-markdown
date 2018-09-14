@@ -52,5 +52,4 @@ fs.readdir(fileName, (err, files) => {
       });
     }
   });
-module.exports = mdLinks;
 
