@@ -1,56 +1,79 @@
 
+'use strict';
 
-//montar un servidor donde se sirve un archivo
-//se hace require de http
-var http = require("http")
+//se requiere request para hacer una solicitud http
+const request = require('request');
+//requerimos el modulo cheerio para extraer los links
+const cheerio = require('cheerio');
 //se usa modulo de node fs(fileSystem) que se comunica con 
 //el sistema de archivos
-var fs = require("fs");
-var ruta = require("path");
+const fs = require("fs");
+//se requiere el modulo path para validar la ruta
+const path = require("path");
+//se require marked para analizar el texto(parseado)
+const marked = require("marked");
+const fetch = require("fetch");
 
-//guardamos en una variable lo que retorna
-//fs.readFile("./index.html", function(err,html){
-  //  http.createServer(function(req,res){
-    //    res.write(html);
-      //  res.end();
-       // }).listen(8080);
-//});
+//validar que la ruta esta normalizada y es absoluta
+function isAbsolute(p) {
+    console.log(path.normalize(p + '/') === path.normalize(path.resolve('README.md') + '/'));
+//se guarda en una variable la ruta normalizada
+const url = path.normalize( p+ '/') === path.normalize(path.resolve('README.md') + '/');
+}
+//convertir a HTML con marked
 
-const ejecutar=()=>{
-    const onRequest=(req,res)=>{
-        var rutaArchivo='.' + ((req.url == '/')?'/index.htm':req.url);
-        console.log("rutaArchivo");
+//extraer los links con cheerio
 
-        var ext=ruta.extname(rutaArchivo);
-        var contentType = 'text/html';
-        switch(ext){
-            case '.css':
-            contentType = 'text/css';
-            break;
-            case '.js':
-            contentType = 'text/javascript';
-            break;
-        }
-        ruta.exist(rutaArchivo, function(){
-            if(existe){
-                fs.readFile(rutaArchivo, function(error,contenido){
-                    if(error){
-                        res.writeHead(500);
-                        res.end();
-                    }
-                    else{
-                        res.writeHead(200,{'content-Type':contentType});
-                        res.end(contenido);
-                    }
-                })
-            }else{
-                res.writeHead(404);
-                res.end();
-            }
-        });
-var server = http.creatServer().listen(3030);
-console.log("servidor corriendo en puerto 3030")
-        }
- exports.ejecutar = ejecutar;
+cheerio . load ( ' <a href="foo"> </a> ' ). root () encontrar ( ' a ' ). attr ( ' href ' );
 
-    }
+var url = 'README.md';
+
+var customHeaderRequest = request.defaults({
+    headers: {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64',
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'}
+})
+
+customHeaderRequest.get(url, function(err, resp, body){
+  $ = cheerio.load(body);
+  links = $('a');
+  $(links).each(function(i, link){
+    console.log($(link).text());
+  });
+});
+
+//mdLinks resuelve una promesa y retorna un array de links
+const mdLinks= (ruta,options)=>{
+const arrayLinks = [];
+//llamamos a fetch con la url a la que queremos acceder como parametro
+//esta llamada nos devuelve una promesa
+fetch(url)
+    .then(function(res) {
+        return res.text();
+        for(){
+          arrayLinks.push({
+              href: res.url,
+              text: text ,
+              file:file
+          });
+    })
+    .then(function(data) {
+        console.log('data = ', data);
+        validateLinks(data){},
+        statsLinks(data);
+    })
+    .catch(function(err) {
+        console.error(err);
+    });
+}
+}
+
+const statsLinks = () =>{
+
+request('url', function (error, response, body) {
+  console.log('error:', error); // imprimir si ocurre un error
+  console.log('statusCode:', response && response.statusCode); //imprimir el estatus del link
+  console.log('body:', body); // Imprima el HTML para la página de inicio de Google.
+
+});
+}
+
